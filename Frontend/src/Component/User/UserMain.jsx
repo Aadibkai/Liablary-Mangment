@@ -1,18 +1,19 @@
-import React from 'react'
-import Home from './Home'
-import Profil from './Profil'
-import Books from './Books'
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Home from './Home';
+import Profil from './Profil';
+import Books from './Books';
 
-
-export const UserMain = () => {
+const UserMain = () => {
   return (
-    <div>
+    <div style={{ fontFamily: 'Poppins, sans-serif' }}>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/profil' element={<Profil />} />
-        <Route path='/books' element={<Books />} />
+        <Route path='/1' element={<Home />} />
+        <Route path='/profile1' element={<Profil />} />
+        <Route path='/books1' element={<Books />} />
       </Routes>
     </div>
-  )
+  );
 }
+
+export default UserMain;

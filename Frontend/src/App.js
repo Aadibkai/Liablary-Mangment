@@ -3,7 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import First from "./Component/Login/Log/First";
 import AdminLogin from "./Component/Login/Log/Log/AdminLogin";
 import Userlogin from "./Component/Login/Log/Log/Userlogin";
-import {UserMain} from "../src/Component/User/UserMain"
+import AdminMain from "./Component/Admin/AdminMain";
+import AdminDashboard from "./Component/Admin/AdminDashbord";
+import UserMain from "./Component/User/UserMain";
 
 const App = () => {
   return (
@@ -12,6 +14,9 @@ const App = () => {
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/user" element={<Userlogin />} />
       <Route path="/usermain" element={<UserMain />} />
+      <Route path="/adminmain" element={<AdminMain/>}/>
+      <Route path="/admindash" element={<AdminDashboard/>}/>
+      
     </Routes>
   );
 };

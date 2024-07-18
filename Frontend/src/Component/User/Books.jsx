@@ -1,5 +1,5 @@
-import React from 'react'
-import Userdash from './Userdash'
+import React from 'react';
+import Userdash from './Userdash';
 
 const Books = () => {
     const books = [
@@ -9,25 +9,50 @@ const Books = () => {
         { id: 4, name: 'Book D', available: false },
         { id: 5, name: 'Book E', available: true },
     ];
+
+    const bookCardStyle = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: '10px',
+        padding: '10px 20px',
+        border: '1px solid #ccc',
+        borderRadius: '8px',
+        backgroundColor: '#fff',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        transition: 'transform 0.3s, box-shadow 0.3s',
+        width: '100%',
+        maxWidth: '600px'
+    };
+
+    const buttonStyle = {
+        backgroundColor: '#007bff',
+        color: '#fff',
+        border: 'none',
+        padding: '8px 16px',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        transition: 'background-color 0.3s',
+    };
+
     return (
         <div style={{ display: "flex" }}>
-            <div><Userdash /></div>
-            <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",width:"100%"}}>
-                <h1>All Books</h1>
-                <div style={{ Width: '100%', margin: 'auto', marginTop: '20px' }}>
+            <Userdash />
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", padding: '20px' }}>
+                <h1 style={{ fontFamily: 'Poppins, sans-serif', fontSize: '28px', marginBottom: '20px' }}>All Books</h1>
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     {books.map((book, index) => (
-                        <div key={book.id} style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            marginBottom: '10px',
-                            padding: '10px',
-                            border: '1px solid #ccc',
-                            borderRadius: '8px',
-                            gap:"200px"
-                        }}>
+                        <div key={book.id} style={bookCardStyle}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.transform = 'scale(1.05)';
+                                e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.2)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.transform = 'scale(1)';
+                                e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+                            }}>
                             <div style={{ flex: 1 }}>
-                                <strong>{index + 1}</strong>  {book.name}
+                                <strong style={{ marginRight: '10px' }}>{index + 1}</strong> {book.name}
                             </div>
                             <div>
                                 {book.available ? (
@@ -36,14 +61,9 @@ const Books = () => {
                                     <span style={{ color: 'red' }}>Not Available</span>
                                 )}
                             </div>
-                            <button style={{
-                                backgroundColor: '#007bff',
-                                color: '#fff',
-                                border: 'none',
-                                padding: '8px 16px',
-                                borderRadius: '5px',
-                                cursor: 'pointer',
-                            }}>
+                            <button style={buttonStyle}
+                                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
+                                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007bff'}>
                                 Borrow
                             </button>
                         </div>
@@ -51,7 +71,7 @@ const Books = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Books
+export default Books;
