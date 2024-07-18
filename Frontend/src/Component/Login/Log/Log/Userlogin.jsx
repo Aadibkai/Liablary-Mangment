@@ -16,6 +16,7 @@ const Userlogin = () => {
     password: "",
     username: "",
     contact: "",
+    role:"user"
   });
 
   console.log(1111, formData)
@@ -32,7 +33,7 @@ const Userlogin = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/user/signUp', formData);
+      const response = await axios.post('http://localhost:3001/api/user/signUp', {...formData, role:"user"});
       console.log("Signup successful:", response.data);
 
       navigate("/usermain");
