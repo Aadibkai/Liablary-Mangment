@@ -1,32 +1,23 @@
-import UserModel from "../models/user.js";
+import adminModel from "../models/admin.js";
 
 
-export const CreateUser = async (req, res) => {
+export const CreateAdmin = async (req, res) => {
  
-  const { firstName, password, num, email} = req.body;
+  const {username, password, email} = req.body;
   try {
     // Check if the user already exists
-    let user = await UserModel.findOne({ email });
-
-    if (user) {
+    let admin = await adminModel.findOne({ email });
+    if (admin) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    
-   
-      user = new UserModel({
-        firstName: firstName,
-        mobileNo: num,
+      admin = new adminModel({
+        username,
         email: email,
-        
         password
       });
-
-    
-    
-   
     // Save the user to the database
-    await user.save();
+    await admin.save();
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     console.error(err.message);
@@ -37,11 +28,12 @@ export const CreateUser = async (req, res) => {
 
 
 
-export const loginUser = async (req, res) => {
+export const loginAdmin = async (req, res) => {
   try {
-   
-      let { username, password } = req.body;
-      const user = await UserModel.findOne({email:username});
+    
+      let { email, password } = req.body;
+      const user = await adminModel.findOne({email});
+
       if (!user) {
           return res.status(400).json({ message: "User not found" });
       }
@@ -51,12 +43,12 @@ export const loginUser = async (req, res) => {
           return res.status(400).json({ message: "Invalid password" });
       }
 
-      const token = await user.generateToken();
-      const { _id, name, email: userEmail, role, designation } = user;
+      const token = await admin.generateToken();
+      const { _id, name, email: userEmail} = user;
       res.cookie("token", token, { expiresIn: "1d" });
       let responseObject = {
           token,
-          user: { _id, name, email: userEmail, role, designation },
+          user: { _id, name, email: userEmail, role},
       };
 
       res.status(200).json({ data: responseObject, success: true });

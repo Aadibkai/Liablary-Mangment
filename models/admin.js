@@ -2,20 +2,20 @@ import { model, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const userSchema = new Schema(
+const adminSchema = new Schema(
   {
-    firstName: { type: String },
-    mobileNo: { type: String },
+    username: { type: String },
     email: { type: String },
     hashPassword: { type: String },
+  
   },
   { timestamps: true }
 );
-userSchema.virtual("password").set(function (password) {
+adminSchema.virtual("password").set(function (password) {
   this.hashPassword = bcrypt.hashSync(password, 10);
 });
 
-userSchema.methods = {
+adminSchema.methods = {
   matchPassword: async function (password) {
     return await bcrypt.compare(password, this.hashPassword);
   },
@@ -29,4 +29,4 @@ userSchema.methods = {
 };
 
 
-export default model("users", userSchema);
+export default model("admin", adminSchema);
