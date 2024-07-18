@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRoutes from "./routes/user.js";
 import bodyParser from "body-parser";
-import cors from "cors";
+import cors from "cors"; 
+import adminRoutes from './routes/admin.js'
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/api", userRoutes);
+app.use("/api", adminRoutes)
 
 mongoose
   .connect(MONGOURL,{
